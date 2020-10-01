@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragment/layout :: head"></head>
+<body>
+
+	<header th:replace="fragment/layout :: header"></header>
+
+
+	<div class="container py-4">
+		
+		<div class="card text-white bg-dark">
+				<h5 class="card-header" th:text="${titulo}">Insert title here</h5>
+				
+				<div class="card-body">
+						
+						<form th:action="@{/form}" method="post" th:object="${cliente}" enctype="multipart/form-data">
+						
+							<div class="form-group row">
+								<label class="col-sm-2 col-form-label">Nombre</label>
+								<div class="col-sm-6">
+									<input type="text" th:field="*{nombre}" class="form-control" th:errorclass="'form-control alert-danger'"/>
+									<small th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" class="form-text text-danger"></small>
+								</div>	  
+							</div>
+							
+							
+							<div class="form-group row">
+								<label class="col-sm-2 col-form-label">Apelido</label>
+								<div class="col-sm-6">
+									<input type="text" th:field="*{apellido}" class="form-control" th:errorclass="'form-control alert-danger'"/>
+									<small th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}" class="form-text text-danger"></small>
+								</div>
+							</div>
+							
+							
+							<div class="form-group row">
+								<label class="col-sm-2 col-form-labell">Email</label>
+								<div class="col-sm-6">
+									<input type="text" th:field="*{email}" class="form-control" th:errorclass="'form-control alert-danger'"/>
+									<small th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="form-text text-danger"></small>
+								</div>
+							</div>
+							
+							<div class="form-group row">
+								<label class="col-sm-2 col-form-label">Fecha</label>
+								<div class="col-sm-6">
+									<input type="text" th:field="*{createAt}" class="form-control" th:errorclass="'form-control alert-danger'"/>
+									<small th:if="${#fields.hasErrors('createAt')}" th:errors="*{createAt}" class="form-text text-danger"></small>
+								</div>
+							</div>
+							
+							<div class="form-group row">
+									<label for="file" class="col-sm-2 col-form-label" >Foto</label>
+								<div class="col-sm-6 " >
+									<input class="form-control" type="file" name="file">
+								</div>
+							</div>
+							
+							<div class="form-group">
+								<input type="submit" value="Guardar Cliente" class="btn btn-secondary"/>
+							</div>
+						</form>
+						
+				</div>
+					
+		</div>
+		
+		
+		<footer th:replace="fragment/layout :: footer"></footer>
+	
+	</div>
+
+
+</body>
+</html>

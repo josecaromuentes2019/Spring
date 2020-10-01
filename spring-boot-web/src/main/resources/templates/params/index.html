@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th=" http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Enviando parametros por URL</title>
+</head>
+<body>
+	<h1>Enviando parametros por URL</h1>
+
+	<ul>
+		<li><a th:href="@{/params/string(textos='Hola Jose Caro')}">/params/string?texto=hola
+				jose caro</a></li>
+		<li><a
+			th:href="@{/params/mix-param(texto='Hola Jose Caro',numero=8)}">/params/string?texto=hola
+				jose caro&numero</a></li>
+		<li><a
+			th:href="@{/params/mix-http(texto='Hola Jose Caro',numero=4)}">/params/string?texto=hola
+				jose caro & numeroHTTP</a></li>
+
+		<li><a
+			th:href="@{/variable/string/{textos}(textos='Hola Jose Caro')}">/variable/string/hola
+				jose caro</a></li>
+
+		<li><a
+			th:href="@{/variable/string/{texto}/{numero}(texto='Hola Jose Caro',numero=7)}">/variable/string/hola
+				jose caro/7</a></li>
+
+		<li><a th:href="@{/variable/string}+'/Hola jose'+'/23'">/variable/string/hola jose caro/23</a></li>
+		
+		<li><a
+			th:href="@{/variable/string/}+${'Hola Jose Caro'}+${'/56'}">/variable/string/hola
+				jose caro/56</a></li>
+	</ul>
+</body>
+</html>

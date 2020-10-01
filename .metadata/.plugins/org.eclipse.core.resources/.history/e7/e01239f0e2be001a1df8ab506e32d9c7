@@ -1,0 +1,50 @@
+package com.spring.web.app.controllers;
+
+
+import java.util.*;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.spring.web.app.models.Usuario;
+
+@Controller
+@RequestMapping("/app")
+public class UsuarioControllers {
+	
+	@Value("${controller.appindex.titulo}")
+	private String titulo; 
+	
+	@RequestMapping({"/index","/home","/"})
+	public String appIndex(Model modelo) {
+		
+		modelo.addAttribute("titulo", titulo);
+		return "index";
+	}
+	
+	
+	@RequestMapping("/perfil")
+	public String perfil(Model modelo) {
+		Usuario us = new Usuario("Jose","Caro","jose@correo.com");
+	
+		modelo.addAttribute("usuario", us);
+		modelo.addAttribute("titulo", "Nombre de Usuatio ".concat(us.getNombre()));
+		return "perfil";
+	}
+	
+	@RequestMapping("listar")
+	public String listar(Model modelo) {
+		
+		List<Usuario> usuario  = new ArrayList<>();/*new Usuario("Jose","Caro","jose@correo.com"),
+				new Usuario("Jhon","Cordoba","jhon@correo.com"),
+				new Usuario("Jhoseft","Caro","jhoseft@correo.com"));*/
+		
+		
+		modelo.addAttribute("titulo", "Trabajando con la vista listar");
+		modelo.addAttribute("usuarios", usuario);
+		return "listar";
+	}
+
+}

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title th:text="${titulo}">Insert title here</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">Spring Boot</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" th:href="@{/listar}">Cliente</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+
+
+	<div class="container ">
+
+		<div class="card my-4 bg-dark text-white">
+			<div class="card-header">
+				<h5 th:text="${titulo}"></h5>
+			</div>
+			<div class="card-body">
+
+				<form th:action="@{/form}" method="post" th:object="${cliente}" >
+
+					<div class="form-group row">
+						<label class="col-form-label col-sm-2">Nombre</label>
+						<div class="col-sm-6">
+							<input type="text" th:field="*{nombre}" class="form-control" th:errorclass="'form-control alert-danger'"/>
+							<small th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" class="form-text text-danger"></small>
+						</div>
+					</div>
+
+					<div class="form-group row">
+						<label class="col-sm-2 col-form-label">Apellido</label>
+						<div class="col-sm-6">
+							<input type="text" th:field="*{apellido}" class="form-control" th:errorclass="'form-control alert-danger'"/>
+							<small th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}" class="form-text text-danger"></small>
+						</div>
+					</div>
+
+					<div class="form-group row">
+						<label class="col-sm-2 col-form-label">Email</label>
+						<div class="col-sm-6">
+							<input type="text" th:field="*{email}" class="form-control" th:errorclass="'form-control alert-danger'"/>
+							<small th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="form-text text-danger"></small>
+						</div>
+					</div>
+
+					<div class="form-group row">
+						<label class="col-sm-2 col-form-label">Fecha</label>
+						<div class="col-sm-6">
+							<input type="text" th:field="*{createAt}" class="form-control" th:errorclass="'form-control alert-danger'"/>
+							<small th:if="${#fields.hasErrors('createAt')}" th:errors="*{createAt}" class="form-text text-danger"></small>
+						</div>
+					</div>
+					
+				 	<div class="form-group ">
+				 	
+				 		<input type="submit" class="btn btn-secondary" value="Agregar Cliente">
+				 	</div>
+				 	
+				 	
+
+				</form>
+
+			</div>
+		</div>
+
+	</div>
+
+</body>
+</html>

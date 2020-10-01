@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/layout :: head"></head>
+<body>
+	<header th:replace="fragments/layout :: header"></header>
+
+	<div class="container my-4">
+		<div class="card">
+			<div class="card-header">
+				<h5 class="card-title" th:text="${titulo}"></h5>
+			</div>
+			<div class="card-body">
+			
+				<a class="btn btn-primary mx-2 mb-2" th:href="@{/factura/form/}+${cliente.id}" th:text="'Crear Factura'"></a>
+
+				<img th:if="${#strings.length(cliente.foto) > 0}"
+					th:src="@{/uploads/}+${cliente.foto}" th:alt="${cliente.foto}"
+					class="float-left img-thumbnail rounded mx-2"
+					style="width: 250px; height: 200px">
+				<ul class="list-group mx-2">
+
+					<li class="list-group-item" th:text="${cliente.nombre}"></li>
+
+					<li class="list-group-item " th:text="${cliente.apellido}"></li>
+					<li class="list-group-item " th:text="${cliente.email}"></li>
+					<li class="list-group-item " th:text="${cliente.createAt}"></li>
+
+				</ul>
+
+				<div th:if="${#lists.isEmpty(cliente.factura)}"
+					class="alert alert-info my-4 mx-2"
+					th:text="'No hay facturas asociadas a '+${cliente.nombre}+' '+${cliente.apellido}"></div>
+				<div class="my-4 mx-2" th:if="${!#lists.isEmpty(cliente.factura)}">
+					<table class="table table-striped  ">
+						<thead class="thead-dark">
+							<tr>
+								<th>Folio</th>
+								<th>Descripcion</th>
+								<th>Fecha</th>
+								<th>Total</th>
+							</tr>
+
+						</thead>
+
+						<tbody>
+							<tr th:each="factura : ${cliente.factura}">
+								<th th:text="${factura.id}"></th>
+								<th th:text="${factura.descripcion}"></th>
+								<th th:text="${factura.createAt}"></th>
+								<th th:text="${factura.total}"></th>
+							</tr>
+						</tbody>
+					</table>
+					<div class="card bg-success" style="width:200px">
+					<div class="card-body">
+					<h5 class="text-white text-center" th:text="'$ '+${cliente.grantotal}"></h5>
+					
+					</div>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+
+	</div>
+</body>
+
+</html>

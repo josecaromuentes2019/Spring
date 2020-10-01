@@ -1,0 +1,33 @@
+package com.bolsadeideas.springboot.di.app;
+
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
+
+import com.bolsadeideas.springboot.di.app.controllers.IndexControllers;
+import com.bolsadeideas.springboot.di.app.models.service.IService;
+import com.bolsadeideas.springboot.di.app.models.service.MiServicio;
+import com.bolsadeideas.springboot.di.app.models.service.MiServicio2;
+
+@Configuration
+public class AppConfiguration {
+
+	@Bean
+	public IService unservicio() {
+		return  new MiServicio();
+	}
+	
+	
+	@Bean
+	public IService otroservicio() {
+		return new MiServicio2();
+	}
+	
+	
+	@Qualifier("unservicio")
+	public IndexControllers indexcontrollers() {
+		return new IndexControllers(unservicio());
+	}
+	
+}

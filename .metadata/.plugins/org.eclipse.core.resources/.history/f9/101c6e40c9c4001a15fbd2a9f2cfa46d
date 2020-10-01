@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title th:text="${titulo}"></title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" />
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">Spring Boot</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarText">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" th:href="@{/listar}">Clientes <span class="sr-only">(current)</span></a>
+      </li>
+    
+    </ul>
+ 
+  </div>
+</nav>
+
+<div class="container">
+	<h1 th:text="${titulo}" class="text-secondary border border-success border-top-0 border-left-0 border-right-0"></h1>
+
+	<table th:if="${!clientes.isEmpty()}" class="table table-striped">
+	<a th:href="@{/form}">Crear Cliente</a>
+		<thead>
+			<tr>
+
+				<th>Id</th>
+				<th>Nombre</th>
+				<th>Apellido</th>
+				<th>Email</th>
+				<th>Fecha</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="cliente: ${clientes}">
+
+				<th th:text="${cliente.id}"></th>
+				<th th:text="${cliente.nombre}"></th>
+				<th th:text="${cliente.apellido}"></th>
+				<th th:text="${cliente.email}"></th>
+				<th th:text="${cliente.createAt}"></th>
+
+			</tr>
+
+		</tbody>
+
+	</table>
+</div>
+</body>
+</html>

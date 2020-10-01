@@ -1,0 +1,73 @@
+package com.spring.web.app.controllers;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+
+import com.spring.web.app.models.Usuario;
+
+@Controller
+@RequestMapping("/app")
+public class IndexController {
+	
+	@Value("${texto.indexcontroller.index}")
+	private String textoIndex;
+	
+	private String textoPerfil;
+	
+	private String textoListar;
+
+	@GetMapping({ "/index", "/home", "/" })
+	public String index(Model modelo) {
+		
+		modelo.addAttribute("titulo", textoIndex);
+		return "indexs";
+	}
+
+	@RequestMapping(value = "/perfil", method = RequestMethod.GET)
+	public String perfil(Model modelo) {
+
+		Usuario usuario = new Usuario();
+		usuario.setApellido("Caro");
+		usuario.setNombre("Jose");
+		usuario.setEmail("josecaro@correo.com");
+
+		modelo.addAttribute("usuario", usuario);
+
+		modelo.addAttribute("titulo", "perfil de usuario: ".concat(usuario.getNombre()));
+		return "perfil";
+	}
+
+	@RequestMapping("/listar")
+	public String listar(Model modelo) {
+
+		/*
+		 * List<Usuario> listUsuarios = Arrays.asList( new
+		 * Usuario("Jose","Caro","Jose@correo.com"), new
+		 * Usuario("Miguel","Lopez","miguel@correo.com"), new
+		 * Usuario("Juan","Diaz","Juan@correo.com") );
+		 * 
+		 * 
+		 * modelo.addAttribute("usuarios",listUsuarios);
+		 */
+		return "listar";
+	}
+
+	@ModelAttribute("usuarios")
+	public List<Usuario> poblarUsuarios() {
+
+		List<Usuario> listUsuarios = Arrays.asList(new Usuario("Jose", "Caro", "Jose@correo.com"),
+				new Usuario("Miguel", "Lopez", "miguel@correo.com"), new Usuario("Juan", "Diaz", "Juan@correo.com"));
+
+		return listUsuarios;
+	}
+}

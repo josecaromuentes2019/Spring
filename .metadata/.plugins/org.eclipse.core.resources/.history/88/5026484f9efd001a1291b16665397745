@@ -1,0 +1,86 @@
+package com.bolsadeideas.springboot.clientes.app.models.service;
+
+import java.util.List;
+
+
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.bolsadeideas.springboot.clientes.app.models.Cliente;
+import com.bolsadeideas.springboot.clientes.app.models.Factura;
+import com.bolsadeideas.springboot.clientes.app.models.Producto;
+import com.bolsadeideas.springboot.clientes.app.models.dao.ICliente;
+import com.bolsadeideas.springboot.clientes.app.models.dao.IFactura;
+import com.bolsadeideas.springboot.clientes.app.models.dao.IProducto;
+
+@Service
+public class Clienteservice implements IClienteService {
+
+	@Autowired
+	ICliente icliente;
+	
+	@Autowired
+	IProducto iproducto;
+	
+	@Autowired
+	IFactura ifactura;
+	
+	@Override
+	@Transactional(readOnly = true)
+	public List<Cliente> findAll() {
+		
+		return (List<Cliente>) icliente.findAll();
+	}
+
+	@Override
+	@Transactional
+	public void save(Cliente cliente) {
+		
+		icliente.save(cliente);
+
+	}
+
+	@Override
+	@Transactional
+	public void delete(Long id) {
+
+		icliente.deleteById(id);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public Cliente findOne(long id) {
+		return icliente.findById(id).orElse(null);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public Page<Cliente> findAll(Pageable pageable) {
+	
+		return icliente.findAll(pageable);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Producto> buscarProductoPorNombre(String termino) {
+		
+		return iproducto.findByNombre(termino);
+	}
+
+	@Override
+	public Producto findProductoById() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void saveFactura(Factura factura) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

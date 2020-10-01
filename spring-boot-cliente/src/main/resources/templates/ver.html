@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th ="http://www.thymrlraf.otg">
+<head th:replace ="fragment/layout :: head"></head>
+<body>
+
+<header th:replace="fragment/layout :: header"></header>
+
+	<div class="container py-4">
+	
+		<div class="card">
+			
+			<h5 class="card-header" th:text="${titulo}"></h5>
+		
+			<div class="carrd-body ">
+													
+				<h5 class="mx-3 my-4"><a th:href="@{/factura/form/}+${cliente.id}" class="badge badge-primary">Crear Factura</a></h5>
+					
+				 <img th:if="${#strings.length(cliente.foto) > 0}" style="max-width: 25%;" class="img-thumbnail rounded float-left mx-3 my-4" th:src="@{'/uploads/'+${cliente.foto}}" th:alt="${cliente.foto}">
+				
+					
+				 <ul class="list-group mx-3 my-4">
+				 	<li class="list-group-item" th:text="${cliente.nombre}"></li>
+				 	<li class="list-group-item" th:text="${cliente.apellido}"></li>
+				 	<li class="list-group-item" th:text="${cliente.email}"></li>
+				 	<li class="list-group-item" th:text="${cliente.createAt}"></li>
+				 </ul>
+				 
+				 <div th:if="${#lists.isEmpty(cliente.factura)}" class="alert alert-info my-4 mx-3"
+				 	  th:text="'No hay Facturas Asociadas a: '+${cliente.nombre}+' '+${cliente.apellido}"></div>
+				 	  
+				 <div class="mt-4 mx-3">
+				 	<table class="table table-striped">
+				 		<thead>
+					 		<tr>
+					 			<th>Folio</th>
+					 			<th>Descripcion</th>
+					 			<th>Fecha</th>
+					 			<th>Total</th>
+					 		</tr>
+				 		</thead>
+				 		
+				 		<tbody>
+				 			<tr th:each="factura : ${cliente.factura}">
+				 				<td th:text="${factura.id}"></td>
+				 				<td th:text="${factura.descripcion}"></td>
+				 				<td th:text="${factura.createAt}"></td>
+				 				<td th:text="${factura.total}"></td>
+				 			</tr>
+				 		</tbody>
+				 	
+				 	</table>
+				 
+				 </div>
+			
+			</div>
+		</div>
+	
+		<footer th:replace="fragment/layout :: footer"></footer>
+	</div>
+
+
+</body>
+</html>

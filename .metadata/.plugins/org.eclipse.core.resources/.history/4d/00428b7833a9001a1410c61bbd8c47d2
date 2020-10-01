@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"/>
+<title>Insert title here</title>
+</head>
+<body>
+ <h1>Comensando con spring boot en puerto 8080</h1>
+ 
+ <table th:if="${!usuarios.isEmpty()}" >
+		<thead >
+			<tr>
+				<td>Nombre</td>
+				<td>Apellido</td>
+				<td>Correo</td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="users: ${usuarios}">
+				<td th:text="${users.nombre}"></td>
+				<td th:text="${users.apellido}"></td>
+				<td th:text="${users.email}"></td>
+			</tr>
+		
+		</tbody>
+	</table>
+</body>
+</html>

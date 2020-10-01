@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;spring-boot-facturacion/src/main/resources/templates/fragments/js/js.html&apos; to &apos;autocomplete.html&apos;" description="Rename resource &apos;js.html&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/main/resources/templates/fragments/js/js.html" name="autocomplete.html" stamp="1598898445151" updateReferences="true"/>
+</session>

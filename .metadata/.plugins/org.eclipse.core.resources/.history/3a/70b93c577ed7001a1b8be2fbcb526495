@@ -1,0 +1,7 @@
+package com.bolsadeideas.springboot.clientes.app;
+
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+class MvcConfiguracion implements WebMvcConfigurer{
+
+}

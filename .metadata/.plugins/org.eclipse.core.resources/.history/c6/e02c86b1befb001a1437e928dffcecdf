@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www-thymeleaf.org">
+
+<script type="text/javascript" th:fragment="javascript">
+
+
+	$(document).ready(function(){
+		$("#buscar_producto").autocomplete({
+			source : function(request,response){
+				
+				$.ajax({
+					type : "get",
+					url : "/factura/cargar-producto/" + request.term,
+					dataType : "json",
+					data : {
+						term:request.term
+					},
+					success:function(respuesta){
+						response($.map(respuesta,function(item){
+							
+							return {
+								value: item.id,
+								label : item.nombre,
+								precio : item.precio
+							}
+						}));
+					}
+				});
+				
+			},
+			select : function(event,ui){
+					//$("#buscar_producto").val(ui.item.label);
+					
+					if(itemHelpers.hasItem(ui.item.value)){
+						itemHelpers.aumentaCantidad(ui.item.value,ui.item.precio);
+						return false;
+					}
+					
+					var linea = $("<tr>",{"id":"row"+ui.item.value}).append(
+						
+						$("<td>",{"class":"d-none"}).append(
+								$("<input>",{
+									"type" : "hidden",
+									"name"   : "item_id[]"
+								}).val(ui.item.value)
+						),
+						$("<td>").text(ui.item.label),
+						$("<td>").text(ui.item.precio),
+						$("<td>").append(
+								$("<input>",{
+									"type"  : "number",
+									"id"    : "cantidad_"+ui.item.value,
+									"class" : "form-control col-sm-2",
+									"name"  : "cantidad[]",
+									change  : function(){
+										itemHelpers.importe(ui.item.value,ui.item.precio,$(this).val());
+									}
+								}).val(1)
+						),
+						$("<td>").append(
+								$("<span>",{
+									"id"  : "total_importe_"+ui.item.value
+								}).html(0)
+						),
+						$("<td>").append(
+									
+								$("<span>",{
+									"class":"btn btn-sm-info",
+									"style":"cursor : pointer"}).html("Eliminar")
+								)
+					);
+					
+					$("#tabla_factura tbody").append(linea);
+					
+					itemHelpers.importe(ui.item.value,ui.item.precio,1);
+					
+					$("#buscar_producto").val("");
+					return false;
+				}
+		});
+	});
+	
+	var itemHelpers = {
+			
+			importe : function(id,precio,cantidad){
+				$("#total_importe_"+id).html(parseInt(precio)*parseInt(cantidad));
+			},
+			hasItem : function(id){
+				var existe = false;
+				$("input[name='item_id[]']").each(function(){
+					if(parseInt($(this).val()) == parseInt(id)){
+						existe = true;
+					}
+				});
+				
+				return existe;
+			},
+			aumentaCantidad : function(id,precio){
+				var cantidad = $("#cantidad_"+id).val() ? parseInt($("#cantidad_"+id).val()) : 0 ;
+				
+				$("#cantidad_"+id).val(++cantidad);
+				this.importe(id,precio,contidad);
+			}
+	}
+</script>
+</html>

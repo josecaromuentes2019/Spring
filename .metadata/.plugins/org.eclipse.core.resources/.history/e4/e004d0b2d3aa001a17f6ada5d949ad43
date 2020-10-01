@@ -1,0 +1,19 @@
+package com.spring.web.app.controllers;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+@Controller
+@RequestMapping("/params")
+public class Parametroscontroller {
+	
+	@RequestMapping("/string")
+	public String recibeParametros(@RequestParam(name = "texto",required = false) String miTexto, Model modelo) {
+		
+		modelo.addAttribute("textoParametro", "Texto por parametro: "+miTexto);
+		return "ver/index";
+	}
+
+}

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th ="http://www.thymeleaf.org">
+<body>
+ <script type="text/javascript" th:fragment="jsOcultarAlert">
+ 	$(document).ready(function(){
+ 		
+ 		
+ 		
+ 		setTimeout(function(){
+ 		$(".alerta").each(function(){
+ 			$(this).slideToggle(1000);
+ 		})
+ 		},4000);
+ 	})
+ 
+ </script>
+</body>
+</html>

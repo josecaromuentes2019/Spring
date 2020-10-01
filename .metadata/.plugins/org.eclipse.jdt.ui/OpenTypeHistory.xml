@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<typeInfoHistroy>
+<typeInfo handle="=spring-boot-practicando/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.bolsadeideas.springboot.practica.app.models.dao{ICliente.java[ICliente" modifiers="513" timestamp="1595104624240"/>
+<typeInfo handle="=spring-boot-cliente/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.bolsadeideas.springboot.clientes.app.models.dao{ICliente.java[ICliente" modifiers="513" timestamp="1596317578486"/>
+<typeInfo handle="=spring-boot-cliente/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.bolsadeideas.springboot.clientes.app.models.service{IServiceCliente.java[IServiceCliente" modifiers="513" timestamp="1600146237670"/>
+<typeInfo handle="=spring-boot-data-jpa/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.bolsadeideas.springboot.app.models.service{IUploadsFileService.java[IUploadsFileService" modifiers="513" timestamp="1597296053691"/>
+<typeInfo handle="=spring-boot-facturacion/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.bolsadeideas.springboot.clientes.app.models.service{IClienteService.java[IClienteService" modifiers="513" timestamp="1600866683590"/>
+</typeInfoHistroy>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragment/layout :: head"></head>
+
+<body>
+
+	<header th:replace="fragment/layout :: header"></header>
+
+	<div class="container py-4">
+
+		<div class="card">
+			<div class="card-header">
+				<h5 class="card-title" th:text="${titulo}"></h5>
+			</div>
+
+			<div class="card-body">
+				<h5>
+					<a class="badge badge-primary" th:href="@{/form}">Crear Cliente</a>
+				</h5>
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>Id</th>
+							<th>Nombre</th>
+							<th>Apellido</th>
+							<th>Eamil</th>
+							<th>Fecha</th>
+							<th>Editar</th>
+							<th>Eliminar</th>
+						</tr>
+					</thead>
+
+					<tbody>
+						<tr th:each="item : ${clientes}">
+							<th ><a class="badge badge-warning" th:href="@{/ver/}+${item.id}" th:text="${item.id}"></a> </th>
+							<th th:text="${item.nombre}"></th>
+							<th th:text="${item.apellido}"></th>
+							<th th:text="${item.email}"></th>
+							<th th:text="${item.createAt}"></th>
+							<th><a class="badge badge-success"
+								th:href="@{/form/}+${item.id}">Editar</a></th>
+							<th><a class="badge badge-danger"
+								th:href="@{/eliminar/}+${item.id}">Eliminar</a></th>
+
+						</tr>
+
+
+					</tbody>
+
+				</table>
+				
+				<nav th:replace="fragment/pagin :: paginador"></nav>
+
+			</div>
+
+		</div>
+		
+		
+		<footer th:replace="fragment/layout :: footer"></footer>
+
+	</div>
+</body>
+
+</html>

@@ -1,0 +1,20 @@
+package com.spring.web.app.controllers;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller 
+@RequestMapping("paramstatic")
+public class VariableRutaControllers {
+	
+	@RequestMapping("/variable/{texto}")
+	public String convariable(@PathVariable String texto,Model modelo) {
+		
+		modelo.addAttribute("textofijo","texto enviado en la ruta "+ texto);
+		
+		return "ver/convariable";
+	}
+
+}
